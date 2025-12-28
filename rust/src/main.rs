@@ -27,7 +27,7 @@ async fn main() -> Result<()> {
     info!("Redis: {}", redis_url);
 
     // Initialize database pool
-    let db_pool = db::create_pool(&database_url)?;
+    let db_pool = db::create_pool(&database_url).await?;
 
     // Initialize Redis client
     let redis_client = redis::Client::open(redis_url.as_str())?;

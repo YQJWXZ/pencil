@@ -1,7 +1,8 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+use sqlx::FromRow;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
 #[allow(dead_code)]
 pub struct User {
     pub id: i64,
@@ -13,7 +14,7 @@ pub struct User {
     pub updated_at: DateTime<Utc>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
 #[allow(dead_code)]
 pub struct Article {
     pub id: i64,
@@ -30,7 +31,7 @@ pub struct Article {
     pub updated_at: DateTime<Utc>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
 #[allow(dead_code)]
 pub struct Category {
     pub id: i64,
@@ -41,7 +42,7 @@ pub struct Category {
     pub updated_at: DateTime<Utc>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
 #[allow(dead_code)]
 pub struct Asset {
     pub id: i64,

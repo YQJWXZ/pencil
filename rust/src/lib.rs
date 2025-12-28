@@ -2,6 +2,7 @@ pub mod db;
 pub mod handlers;
 pub mod models;
 pub mod proto; // Proto generated code
+pub mod repositories;
 pub mod services;
 pub mod tools;
 
