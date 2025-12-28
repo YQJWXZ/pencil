@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package common;
+
+// Pagination request parameters
+message Pagination {
+  int32 page = 1;        // Page number (1-indexed)
+  int32 page_size = 2;   // Items per page
+}
+
+// Pagination metadata in response
+message PaginationMeta {
+  int32 page = 1;
+  int32 page_size = 2;
+  int64 total = 3;       // Total number of items
+  int32 total_pages = 4;
+}
+
+// RFC3339 timestamp
+message Timestamp {
+  string value = 1;  // RFC3339 format: 2023-01-01T00:00:00Z
+}
+
+// Standard error response
+message Error {
+  int32 code = 1;
+  string message = 2;
+  map<string, string> details = 3;
+}
+
+// Empty response for operations that don't return data
+message Empty {}

@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package auth;
+
+import "common/common.proto";
+
+// User message
+message User {
+  int64 id = 1;
+  string username = 2;
+  string email = 3;
+  string role = 4;  // "admin" or "user"
+  common.Timestamp created_at = 5;
+}
+
+// Register request
+message RegisterRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+// Register response
+message RegisterResponse {
+  User user = 1;
+  string token = 2;
+}
+
+// Login request
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// Login response
+message LoginResponse {
+  User user = 1;
+  string token = 2;  // JWT access token
+  int64 expires_in = 3;  // Token expiration in seconds
+}
+
+// Verify token request
+message VerifyTokenRequest {
+  string token = 1;
+}
+
+// Verify token response
+message VerifyTokenResponse {
+  bool valid = 1;
+  User user = 2;
+}
+
+// Auth service definition
+service AuthService {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc VerifyToken(VerifyTokenRequest) returns (VerifyTokenResponse);
+}

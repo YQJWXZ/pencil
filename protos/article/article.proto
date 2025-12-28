@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package article;
+
+import "common/common.proto";
+
+// Category message
+message Category {
+  int64 id = 1;
+  string name = 2;
+  string slug = 3;
+  string description = 4;
+  int32 article_count = 5;
+}
+
+// Article message
+message Article {
+  int64 id = 1;
+  string title = 2;
+  string content = 3;  // Markdown content
+  string summary = 4;
+  int64 author_id = 5;
+  string author_name = 6;
+  int64 category_id = 7;
+  string category_name = 8;
+  repeated string tags = 9;
+  string status = 10;  // "draft" or "published"
+  int64 view_count = 11;
+  string cover_image = 12;
+  common.Timestamp created_at = 13;
+  common.Timestamp updated_at = 14;
+}
+
+// Create article request
+message CreateArticleRequest {
+  string title = 1;
+  string content = 2;
+  string summary = 3;
+  int64 category_id = 4;
+  repeated string tags = 5;
+  string status = 6;
+  string cover_image = 7;
+}
+
+// Update article request
+message UpdateArticleRequest {
+  int64 id = 1;
+  optional string title = 2;
+  optional string content = 3;
+  optional string summary = 4;
+  optional int64 category_id = 5;
+  repeated string tags = 6;
+  optional string status = 7;
+  optional string cover_image = 8;
+}
+
+// Get article request
+message GetArticleRequest {
+  int64 id = 1;
+}
+
+// List articles request
+message ListArticlesRequest {
+  common.Pagination pagination = 1;
+  optional int64 category_id = 2;
+  optional string status = 3;
+  optional string keyword = 4;  // Search in title and content
+  string order_by = 5;  // "created_at" or "view_count"
+}
+
+// List articles response
+message ListArticlesResponse {
+  repeated Article articles = 1;
+  common.PaginationMeta meta = 2;
+}
+
+// Delete article request
+message DeleteArticleRequest {
+  int64 id = 1;
+}
+
+// Category CRUD messages
+message CreateCategoryRequest {
+  string name = 1;
+  string slug = 2;
+  string description = 3;
+}
+
+message UpdateCategoryRequest {
+  int64 id = 1;
+  optional string name = 2;
+  optional string slug = 3;
+  optional string description = 4;
+}
+
+message GetCategoryRequest {
+  int64 id = 1;
+}
+
+message ListCategoriesRequest {
+  common.Pagination pagination = 1;
+}
+
+message ListCategoriesResponse {
+  repeated Category categories = 1;
+  common.PaginationMeta meta = 2;
+}
+
+message DeleteCategoryRequest {
+  int64 id = 1;
+}
+
+// Article service definition
+service ArticleService {
+  rpc CreateArticle(CreateArticleRequest) returns (Article);
+  rpc GetArticle(GetArticleRequest) returns (Article);
+  rpc UpdateArticle(UpdateArticleRequest) returns (Article);
+  rpc DeleteArticle(DeleteArticleRequest) returns (common.Empty);
+  rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
+
+  rpc CreateCategory(CreateCategoryRequest) returns (Category);
+  rpc GetCategory(GetCategoryRequest) returns (Category);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (Category);
+  rpc DeleteCategory(DeleteCategoryRequest) returns (common.Empty);
+  rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
+}

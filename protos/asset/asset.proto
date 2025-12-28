@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package asset;
+
+import "common/common.proto";
+
+// Asset (uploaded file) message
+message Asset {
+  int64 id = 1;
+  string filename = 2;
+  string file_path = 3;
+  string url = 4;
+  string mime_type = 5;
+  int64 size = 6;  // File size in bytes
+  int64 uploader_id = 7;
+  common.Timestamp created_at = 8;
+}
+
+// Upload file request
+message UploadFileRequest {
+  string filename = 1;
+  bytes content = 2;
+  string mime_type = 3;
+}
+
+// Upload file response
+message UploadFileResponse {
+  Asset asset = 1;
+}
+
+// Get asset request
+message GetAssetRequest {
+  int64 id = 1;
+}
+
+// List assets request
+message ListAssetsRequest {
+  common.Pagination pagination = 1;
+  optional string mime_type_prefix = 2;  // Filter by MIME type (e.g., "image/")
+}
+
+// List assets response
+message ListAssetsResponse {
+  repeated Asset assets = 1;
+  common.PaginationMeta meta = 2;
+}
+
+// Delete asset request
+message DeleteAssetRequest {
+  int64 id = 1;
+}
+
+// Asset service definition
+service AssetService {
+  rpc UploadFile(UploadFileRequest) returns (UploadFileResponse);
+  rpc GetAsset(GetAssetRequest) returns (Asset);
+  rpc ListAssets(ListAssetsRequest) returns (ListAssetsResponse);
+  rpc DeleteAsset(DeleteAssetRequest) returns (common.Empty);
+}
