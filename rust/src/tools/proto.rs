@@ -6,8 +6,8 @@ pub mod common {
 }
 
 #[allow(clippy::all)]
-pub mod auth {
-    tonic::include_proto!("auth");
+pub mod user {
+    tonic::include_proto!("user");
 }
 
 #[allow(clippy::all)]
@@ -22,10 +22,10 @@ pub mod asset {
 
 // ========== Re-exports: Services & Messages ==========
 
-// Auth Service
-pub use auth::auth_service_client::AuthServiceClient;
-pub use auth::auth_service_server::{AuthService, AuthServiceServer};
-pub use auth::{
+// User Service
+pub use user::user_service_client::UserServiceClient;
+pub use user::user_service_server::{UserService, UserServiceServer};
+pub use user::{
     LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User, VerifyTokenRequest,
     VerifyTokenResponse,
 };

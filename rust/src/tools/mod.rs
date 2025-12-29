@@ -1,2 +1,2 @@
-// Re-export proto module for convenience
-pub use crate::proto;
+pub mod proto;
+pub mod utils;

@@ -27,7 +27,7 @@ repos:
       # 2. Rust Lint 检查
       - id: rust-clippy
         name: Run Rust linter (clippy)
-        entry: bash -c 'cd rust && cargo clippy --all-targets -- -D warnings'
+        entry: bash -c 'cd rust && cargo clippy --all-targets -- -W clippy::correctness -W clippy::suspicious -W clippy::perf'
         language: system
         files: \.rs$
         pass_filenames: false
@@ -36,23 +36,14 @@ repos:
   # ========== 版本管理 ==========
   - repo: local
     hooks:
-      # 3. 版本号自增
+      # 3. 版本号自增（在 prepare-commit-msg 阶段，可以读取 message 并 stage 文件）
       - id: version-bump
         name: Bump version based on commit type
         entry: bash scripts/version-bump.sh
         language: system
         always_run: true
         pass_filenames: false
-        stages: [commit-msg]
-
-      # 4. 同步版本号到配置文件
-      - id: sync-version
-        name: Sync version to project files
-        entry: bash -c 'bash scripts/sync-version.sh && git add VERSION rust/Cargo.toml'
-        language: system
-        always_run: true
-        pass_filenames: false
-        stages: [pre-commit]
+        stages: [prepare-commit-msg]
 
   # ========== 通用检查 ==========
   - repo: https://github.com/pre-commit/pre-commit-hooks

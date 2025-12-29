@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package auth;
+package user;
 
 import "common/common.proto";
 
@@ -51,7 +51,7 @@ message VerifyTokenResponse {
 }
 
 // Auth service definition
-service AuthService {
+service UserService {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc VerifyToken(VerifyTokenRequest) returns (VerifyTokenResponse);

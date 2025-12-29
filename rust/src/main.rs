@@ -1,12 +1,8 @@
 use anyhow::Result;
 use dotenv::dotenv;
+use pencil::{db, handlers, services};
 use std::env;
 use tracing::{Level, info};
-
-mod db;
-mod handlers;
-mod models;
-mod services;
 
 #[tokio::main]
 async fn main() -> Result<()> {

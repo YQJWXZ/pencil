@@ -1,7 +1,7 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let proto_files = vec![
         "../protos/common/common.proto",
-        "../protos/auth/auth.proto",
+        "../protos/user/user.proto",
         "../protos/article/article.proto",
         "../protos/asset/asset.proto",
     ];

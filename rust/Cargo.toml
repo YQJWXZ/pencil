@@ -40,6 +40,10 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 anyhow = "1.0"
 thiserror = "2.0"
 dotenv = "0.15"
+base64 = "0.22.1"
+rsa = "0.9.9"
+sha2 = "0.10.9"
+hex = "0.4.3"
 
 [build-dependencies]
 tonic-build = "0.14.1"

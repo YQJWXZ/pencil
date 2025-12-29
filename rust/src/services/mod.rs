@@ -5,14 +5,14 @@ use tonic::transport::Server;
 
 mod article;
 mod asset;
-mod auth;
+mod user;
 
 #[allow(unused_imports)]
 pub use article::ArticleServiceImpl;
 #[allow(unused_imports)]
 pub use asset::AssetServiceImpl;
 #[allow(unused_imports)]
-pub use auth::AuthServiceImpl;
+pub use user::UserServiceImpl;
 
 use crate::db::Pool;
 

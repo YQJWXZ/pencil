@@ -80,4 +80,11 @@ info "New version: $new_version"
 # 写回 VERSION 文件
 echo "$new_version" > "$VERSION_FILE"
 
+# 同步到 Cargo.toml
+bash scripts/sync-version.sh
+
+# 自动 stage 修改的文件（在 prepare-commit-msg 阶段可以修改 staging area）
+git add "$VERSION_FILE" rust/Cargo.toml rust/Cargo.lock
+
 info "✓ Version bumped from $current_version to $new_version"
+info "Files staged: VERSION, Cargo.toml, Cargo.lock"
